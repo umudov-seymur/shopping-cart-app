@@ -86,7 +86,6 @@ body {
 }
 
 /* PRODUCTS */
-
 .products .card-image {
   border-bottom: 1px solid #ededed;
 }
@@ -112,4 +111,52 @@ body {
 .checkout .btn-primary {
   border-radius: 50px;
   height: 50px;
+}
+
+/*  SKELETON EFFECT */
+
+.skeleton {
+  transition: all 0.3s;
+}
+
+.skeleton .card-img-top {
+  opacity: 0;
+}
+
+.skeleton .hide-text {
+  background: #e2e2e2;
+  color: transparent;
+  position: relative;
+  overflow: hidden;
+  border: transparent;
+}
+
+.skeleton a,
+.skeleton .text-secondary,
+.skeleton .text-warning,
+.skeleton .fa {
+  color: transparent !important;
+}
+
+.skeleton .hide-text::before {
+  content: "";
+  position: absolute;
+  left: 0%;
+  top: 0;
+  height: 100%;
+  width: 50px;
+  background: linear-gradient(to right, #e2e2e2 25%, #d5d5d5 50%, #e2e2e2 100%);
+  animation-name: gradient-animation;
+  animation-duration: 2s;
+  animation-iteration-count: infinite;
+  filter: blur(5px);
+}
+
+@keyframes gradient-animation {
+  from {
+    left: 0%;
+  }
+  to {
+    left: 100%;
+  }
 }

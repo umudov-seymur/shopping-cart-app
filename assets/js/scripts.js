@@ -22,8 +22,18 @@ class UI {
         });
       })
       .finally(() => {
-        preloader.classList.add("d-none");
+        UI.removeAllLoadingEffect(productList.querySelectorAll(".card"));
       });
+  }
+
+  static removeAllLoadingEffect(productCards) {
+    preloader.classList.add("d-none");
+
+    setTimeout(() => {
+      productCards.forEach((productCart) =>
+        productCart.classList.remove("skeleton")
+      );
+    }, 2500);
   }
 
   static displayCartItems() {
@@ -164,32 +174,34 @@ class UI {
   static createProductHtml(product) {
     return `
           <div class="col-lg-3 col-md-6 mb-4">
-              <div class="card h-100 shadow">
-                  <a href="#" class="text-center card-image">
+              <div class="card h-100 shadow skeleton">
+                  <a href="#" class="text-center card-image hide-text">
                       <img class="card-img-top" src="${
                         product.image
                       }" alt="..." />
                   </a>
                   <div class="card-body">
-                      <h4 class="card-title">
+                      <h4 class="card-title hide-text">
                           <a href="#">${product.title}</a>
                       </h4>
                       <div class="d-flex align-items-baseline">
-                        <div class="rating">
+                        <div class="rating hide-text">
                             ${UI.createProductRatingHtml(product.rating.rate)}
                         </div>
-                        <small class="text-secondary ml-2">(${
+                        <small class="text-secondary ml-2 hide-text">(${
                           product.rating.count
                         })</small>
                       </div>
-                      <h5 class="font-weight-bold">$${product.price}</h5>
-                      <p class="card-text">
+                      <h5 class="font-weight-bold hide-text">$${
+                        product.price
+                      }</h5>
+                      <p class="card-text hide-text">
                           ${product.description.substring(0, 64)} ...
                       </p>
                   </div>
                   <div class="card-footer">
                       <button 
-                          class="btn btn-outline-primary w-100 add-to-cart" 
+                          class="btn btn-outline-primary w-100 add-to-cart hide-text" 
                           onclick="UI.storeCartItem(${product.id})">
                           <i class="fas fa-cart-plus"></i>
                           Add to cart
